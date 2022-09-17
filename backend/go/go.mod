@@ -3,10 +3,11 @@ module github.com/doxanocap/SilkwayTransitHack/backend/go
 go 1.18
 
 require (
-	github.com/doxanocap/golang-react/backend v0.0.0-20220916101414-44286fb008c0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19
 	github.com/gin-gonic/gin v1.8.1
+	github.com/golang-jwt/jwt/v4 v4.4.2
+	github.com/gorilla/websocket v1.5.0
 	github.com/lib/pq v1.10.7
 	golang.org/x/crypto v0.0.0-20220829220503-c86fa9a7ed90
 )
@@ -17,8 +18,6 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
-	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
-	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect

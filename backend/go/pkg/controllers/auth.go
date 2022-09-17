@@ -2,14 +2,15 @@ package controllers
 
 import (
 	"fmt"
+	"math/rand"
+	"net/http"
+	"time"
+
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/database"
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/models"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
-	"math/rand"
-	"net/http"
-	"strconv"
-	"time"
 )
 
 const SecretKey = "secret"
@@ -24,12 +25,13 @@ func Register(ctx *gin.Context) {
 	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
 
 	user := models.User{
-		Token:    generateToken(10),
-		Username: data["username"],
-		Email:    data["email"],
+		Id:       data["id"],
+		Type:     data["type"],
+		Name:     data["name"],
+		Surname:  data["surname"],
 		Password: password,
 	}
-	_, err := database.DB.Query(fmt.Sprintf("INSERT INTO users (token, username, email, password) VALUES('%s','%s','%s','%s')", user.Token, user.Username, user.Email, user.Password))
+	_, err := database.DB.Query(fmt.Sprintf("INSERT INTO users (id,type,name, surname, password) VALUES('%s','%s','%s','%s','%s')", user.Id, user.Type, user.Name, user.Surname, user.Password))
 	if err != nil {
 		panic(err)
 	}
@@ -44,15 +46,15 @@ func Login(ctx *gin.Context) {
 		panic(err)
 	}
 
-	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE email = '%s'", data["email"]))
+	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE name = '%s'", data["name"]))
 	if err != nil {
 		panic(err)
 	}
 
 	var user models.User
 	for res.Next() {
-		err = res.Scan(&user.Id, &user.Token, &user.Username, &user.Email, &user.Password)
-		if user.Id == 0 {
+		err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password)
+		if user.Id == "" {
 			ctx.JSON(http.StatusNotFound, gin.H{"message": "user not found"})
 			return
 		}
@@ -63,7 +65,7 @@ func Login(ctx *gin.Context) {
 		break
 	}
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    strconv.Itoa(int(user.Id)),
+		Issuer:    string(user.Id),
 		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(), // expires after 1 day
 	})
 
@@ -99,7 +101,7 @@ func User(ctx *gin.Context) {
 	var user models.User
 	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE id = '%s'", claims.Issuer))
 	for res.Next() {
-		err = res.Scan(&user.Id, &user.Token, &user.Username, &user.Email, &user.Password)
+		err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password)
 		if err != nil {
 			panic(err)
 		}

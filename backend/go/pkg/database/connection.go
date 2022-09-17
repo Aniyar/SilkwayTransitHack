@@ -12,7 +12,7 @@ const (
 	port     = 5432
 	user     = "postgres"
 	password = "eldoseldos"
-	dbname   = ""
+	dbname   = "silkhack"
 )
 
 var psqlInfo = fmt.Sprintf("host=%s port=%d user=%s "+
