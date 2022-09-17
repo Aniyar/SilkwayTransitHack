@@ -23,11 +23,12 @@ func DriverInfo(ctx *gin.Context) models.User {
 		panic(err)
 	}
 	claims := token.Claims.(*jwt.RegisteredClaims)
-	user := models.User{"", "", "", "", []byte{}}
-	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE id = '%s'", claims.Issuer))
+	user := models.User{"", "", "", "", "", []byte{}}
+	fmt.Println(claims, "CLAIMS")
+	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE token = '%s'", claims.Issuer))
 	if res != nil {
 		for res.Next() {
-			err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password)
+			err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
 			if err != nil {
 				panic(err)
 			}
@@ -39,6 +40,7 @@ func DriverInfo(ctx *gin.Context) models.User {
 
 func Stations(ctx *gin.Context) {
 	user := DriverInfo(ctx)
+	fmt.Println(string(user.Id))
 	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM trips WHERE driverid = '%s'", user.Name+user.Surname))
 	if err != nil {
 		panic(err)
@@ -63,6 +65,5 @@ func Stations(ctx *gin.Context) {
 		}
 		break
 	}
-	fmt.Println(road)
 	ctx.JSON(http.StatusOK, road)
 }

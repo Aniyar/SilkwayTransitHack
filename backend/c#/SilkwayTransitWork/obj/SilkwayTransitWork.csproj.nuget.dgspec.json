@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {}
+    "C:\\Users\\eldos\\go\\src\\github.com\\doxanocap\\SilkwayTransitHack\\backend\\C#\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {
+    "C:\\Users\\eldos\\go\\src\\github.com\\doxanocap\\SilkwayTransitHack\\backend\\C#\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
+        "projectUniqueName": "C:\\Users\\eldos\\go\\src\\github.com\\doxanocap\\SilkwayTransitHack\\backend\\C#\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
         "projectName": "SilkwayTransitWork",
-        "projectPath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
-        "packagesPath": "C:\\Users\\Aniyar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\obj\\",
+        "projectPath": "C:\\Users\\eldos\\go\\src\\github.com\\doxanocap\\SilkwayTransitHack\\backend\\C#\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
+        "packagesPath": "C:\\Users\\eldos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\eldos\\go\\src\\github.com\\doxanocap\\SilkwayTransitHack\\backend\\C#\\SilkwayTransitWork\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Aniyar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\eldos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net6.0": {

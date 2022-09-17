@@ -31,7 +31,8 @@ func Register(ctx *gin.Context) {
 		Surname:  data["surname"],
 		Password: password,
 	}
-	_, err := database.DB.Query(fmt.Sprintf("INSERT INTO users (id,type,name, surname, password) VALUES('%s','%s','%s','%s','%s')", user.Id, user.Type, user.Name, user.Surname, user.Password))
+	user.Token = generateToken(10)
+	_, err := database.DB.Query(fmt.Sprintf("INSERT INTO users (id,token,type,name, surname, password) VALUES('%s','%s','%s','%s','%s','%s')", user.Id, user.Token, user.Type, user.Name, user.Surname, user.Password))
 	if err != nil {
 		panic(err)
 	}
@@ -53,7 +54,11 @@ func Login(ctx *gin.Context) {
 
 	var user models.User
 	for res.Next() {
-		err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password)
+		err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(user.Id)
 		if user.Id == "" {
 			ctx.JSON(http.StatusNotFound, gin.H{"message": "user not found"})
 			return
@@ -65,7 +70,7 @@ func Login(ctx *gin.Context) {
 		break
 	}
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    string(user.Id),
+		Issuer:    string(user.Token),
 		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(), // expires after 1 day
 	})
 
@@ -80,6 +85,7 @@ func Login(ctx *gin.Context) {
 		Value:   token,
 		Expires: time.Now().Add(time.Hour * 24),
 	})
+	fmt.Println(user, "qwe")
 
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
@@ -99,9 +105,9 @@ func User(ctx *gin.Context) {
 	claims := token.Claims.(*jwt.RegisteredClaims)
 
 	var user models.User
-	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE id = '%s'", claims.Issuer))
+	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE token = '%s'", claims.Issuer))
 	for res.Next() {
-		err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password)
+		err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
 		if err != nil {
 			panic(err)
 		}

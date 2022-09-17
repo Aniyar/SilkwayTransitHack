@@ -144,3 +144,6 @@ C:\Users\Aniyar\Desktop\Hack\backend\c#\SilkwayTransitWork\obj\Debug\net6.0\refi
 C:\Users\Aniyar\Desktop\Hack\backend\c#\SilkwayTransitWork\obj\Debug\net6.0\SilkwayTransitWork.pdb
 C:\Users\Aniyar\Desktop\Hack\backend\c#\SilkwayTransitWork\obj\Debug\net6.0\SilkwayTransitWork.genruntimeconfig.cache
 C:\Users\Aniyar\Desktop\Hack\backend\c#\SilkwayTransitWork\obj\Debug\net6.0\ref\SilkwayTransitWork.dll
+C:\Users\eldos\go\src\github.com\doxanocap\SilkwayTransitHack\backend\C#\SilkwayTransitWork\obj\Debug\net6.0\SilkwayTransitWork.dll
+C:\Users\eldos\go\src\github.com\doxanocap\SilkwayTransitHack\backend\C#\SilkwayTransitWork\obj\Debug\net6.0\refint\SilkwayTransitWork.dll
+C:\Users\eldos\go\src\github.com\doxanocap\SilkwayTransitHack\backend\C#\SilkwayTransitWork\obj\Debug\net6.0\SilkwayTransitWork.pdb
