@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {}
+    "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {
+    "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
+        "projectUniqueName": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
         "projectName": "SilkwayTransitWork",
-        "projectPath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
+        "projectPath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
         "packagesPath": "C:\\Users\\Aniyar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\SilkwayTransitWork\\obj\\",
+        "outputPath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aniyar\\AppData\\Roaming\\NuGet\\NuGet.Config",
