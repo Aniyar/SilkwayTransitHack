@@ -8,7 +8,6 @@ import (
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/database"
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/models"
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v4"
 )
 
 func DriverInfo(ctx *gin.Context) {
@@ -34,6 +33,7 @@ func DriverInfo(ctx *gin.Context) {
 			break
 		}
 	}
-	ctx.JSON(http.StatusOK, user)
-	return
+	ctx.JSON(http.StatusOK, gin.H{
+		"driverId": user.Name + user.Surname,
+	})
 }

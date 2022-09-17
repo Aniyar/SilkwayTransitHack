@@ -3,16 +3,28 @@ package models
 type User struct {
 	Id       string `json:"id"`
 	Type     string `json:"type"`
-	Name     string `json:"username"`
-	Surname  string `json:"email"`
+	Name     string `json:"name"`
+	Surname  string `json:"surname"`
 	Password []byte `json:"-"`
 }
 
-type CurrentStationState struct {
-	StationId         string `json:"stationId"`
-	DriverId          string `json:"driverID"`
-	DriverApprove     string `json:"driverApprove"`
-	DriverApproveTime string `json:"driverApproveTime"`
-	DepoApprove       string `json:"depoApprove"`
-	DepoApproveTime   string `json:"depoApproveTime"`
+type Trips struct {
+	TripId       string `json:"tripId"`
+	DriverId     string `json:"driverID"`
+	TrainId      string `json:"trainId"`
+	RoadId       string `json:"roadId"`
+	StartStation string `json:"startStation"`
+	FinalStation string `json:"finalStation"`
+	Approved     string `json:"approved"`
+	Finished     string `json:"finished"`
+}
+
+type TrainsHistory struct {
+	TripId      string `json:"tripId"`
+	Gas         string `json:"gas"`
+	Weight      string `json:"weight"`
+	StationId   string `json:"stationId"`
+	DepoApprove string `json:"depoApprove"`
+	Distance    string `json:"distance"`
+	ArrivalTime string `json:"arrivalTime"`
 }
