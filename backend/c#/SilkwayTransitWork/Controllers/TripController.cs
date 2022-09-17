@@ -22,7 +22,8 @@ namespace SilkwayTransitWork.Controllers
     public class TripController : ControllerBase
     {
 
-        [HttpPost(Name = "StartTrip")]
+        [HttpPost]
+        [Route("StartTrip")]
         public void StartTrip([FromQuery] String driverId, [FromQuery] String trainid, [FromQuery] String startstation, [FromQuery] String finalstation, [FromQuery] String roadid)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))
@@ -54,7 +55,8 @@ namespace SilkwayTransitWork.Controllers
             }
         }
 
-        [HttpPost(Name = "FinishTrip")]
+        [HttpPost]
+        [Route("FinishTrip") ]
         public void FinishTrip([FromQuery] String driverId)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))
@@ -83,5 +85,7 @@ namespace SilkwayTransitWork.Controllers
                 }
             }
         }
+
+
     }
 }
