@@ -8,12 +8,13 @@ import (
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/database"
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/models"
 	"github.com/gin-gonic/gin"
+	jwt "github.com/golang-jwt/jwt/v4"
 )
 
-func DriverInfo(ctx *gin.Context) {
+func DriverInfo(ctx *gin.Context) models.User {
 	cookie, err := ctx.Cookie("jwt")
 	if err != nil {
-		return
+		return models.User{}
 	}
 	token, err := jwt.ParseWithClaims(cookie, &jwt.RegisteredClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(controllers.SecretKey), nil
@@ -33,7 +34,35 @@ func DriverInfo(ctx *gin.Context) {
 			break
 		}
 	}
-	ctx.JSON(http.StatusOK, gin.H{
-		"driverId": user.Name + user.Surname,
-	})
+	return user
+}
+
+func Stations(ctx *gin.Context) {
+	user := DriverInfo(ctx)
+	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM trips WHERE driverid = '%s'", user.Name+user.Surname))
+	if err != nil {
+		panic(err)
+	}
+	var trip models.Trips
+	for res.Next() {
+		err := res.Scan(&trip.TripId, &trip.DriverId, &trip.TrainId, &trip.Date, &trip.StartStation, &trip.FinalStation, &trip.RoadId, &trip.Approved, &trip.Finished, &trip.Finishdate)
+		if err != nil {
+			panic(err)
+		}
+		break
+	}
+	res, err = database.DB.Query(fmt.Sprintf("SELECT * FROM roads WHERE roadid = '%s'", trip.RoadId))
+	if err != nil {
+		panic(err)
+	}
+	var road models.Roads
+	for res.Next() {
+		err := res.Scan(&road.RoadId, &road.Stations)
+		if err != nil {
+			panic(err)
+		}
+		break
+	}
+	fmt.Println(road)
+	ctx.JSON(http.StatusOK, road)
 }

@@ -5,7 +5,7 @@ import "./index.css"
 
 const LoginPageContainer = ({setUsername}) => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
+    const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
     const loginUser = async (e) => {
@@ -15,20 +15,20 @@ const LoginPageContainer = ({setUsername}) => {
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
             body: JSON.stringify({
-                email,
+                id,
                 password
             })
         });
         const data = await response.json()
-        navigate("/");
-        window.location.reload()
+        console.log(data);
+        navigate("/main");
         setUsername(data.username);
     }
     return (
         <div className="loginPageContainer">
             <form onSubmit={loginUser}>
                 <h1>Sign Up page</h1>
-                <input className="loginPageContainer-input1" type={"email"} id={"inputEmail"} placeholder={"Email"} onChange={e => setEmail(e.target.value)} />
+                <input className="loginPageContainer-input1" type={"id"} id={"id"} placeholder={"Id"} onChange={e => setId(e.target.value)} />
                 <input className="loginPageContainer-input2" type={"password"} id={"inputPassword"} placeholder={"Password"} onChange={e => setPassword(e.target.value)} />
                 <button onClick={loginUser}>Login</button>
             </form>

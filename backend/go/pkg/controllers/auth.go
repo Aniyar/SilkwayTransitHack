@@ -46,7 +46,7 @@ func Login(ctx *gin.Context) {
 		panic(err)
 	}
 
-	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE name = '%s'", data["name"]))
+	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE id = '%s'", data["id"]))
 	if err != nil {
 		panic(err)
 	}
