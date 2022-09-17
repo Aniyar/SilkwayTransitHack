@@ -7,6 +7,7 @@ import Login from './pages/login';
 import PagesHeader from  './components/pagesHeader'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Depo from './pages/depo';
+import Track from './pages/track';
 
 const App = () => {
     const [username, setUsername] = useState("")
@@ -33,6 +34,7 @@ const App = () => {
                 <Route path={"/"} element={<Login setUsername={setUsername}/>}/>
                 <Route path={"/register"} element={<Register />}/>
                 <Route path={"/depo"} element={<Depo/>}/>
+                <Route path={"/tracking"} element={<Track/>}/>
             </Routes>
         </BrowserRouter>
     );

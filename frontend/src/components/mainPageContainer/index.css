@@ -4,8 +4,11 @@
 .buttonPosition{
 
 }
-.drop{
+.butt{
 
+}
+.margint{
+  margin-top: 40px;
 }
 .next{
   background-color: #424245;
@@ -14,6 +17,7 @@
 .card{
   background-color: white;
   gap: 1rem;
+  justify-content: space-between;
 
 }
 .cardmargin{
@@ -27,8 +31,7 @@
   gap: 4rem;
 }
 .MainPageContainer {
-  margin-top: 2rem;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,7 +43,7 @@
 }  
 
 .MainPageContainer-upperLarge {
-  margin-top: 120px;
+  margin-top: 50px;
   margin-bottom: 20px;
   width: 90vw;
   background-color: #f8f9fa;

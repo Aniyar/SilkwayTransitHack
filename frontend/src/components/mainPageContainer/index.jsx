@@ -6,13 +6,14 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import {useNavigate} from 'react-router-dom';
 import { useState } from "react";
 
+
 const MainPageContainer = ({CurrentUsersName}) => {
     const [isDone, setIsDone]= useState(false); 
     const navigate = useNavigate();
     const next = () => {
         console.log(isDone);
         if (isDone===true){
-            navigate("/depo");
+            navigate("/tracking");
             window.location.reload()
         }
     }
@@ -56,11 +57,11 @@ const MainPageContainer = ({CurrentUsersName}) => {
       <Card.Body className="card" id="card1">
         <Card.Title>Вы прибыли в депо?</Card.Title>
         <Card.Text>
-          Отправьте запрос о прибытие в депо. Затем, дождитесь подверждение о вашем прибытие от Депо.
+          Отправьте запрос о прибытие в депо. Затем, дождитесь подверждения о вашем прибытие в депо.
         </Card.Text>
-        
+      
         <Button variant="primary" className = "buttonCard" onClick={arrived}>Прибыл в депо.</Button>
-   
+  
       </Card.Body>
     </Card>
     <Card style={{ width: '30rem' }}>
@@ -69,7 +70,7 @@ const MainPageContainer = ({CurrentUsersName}) => {
         <Card.Text>
           После того, как ваш запрос о прибытие потвержден. Запрос об успешном прохождении медосмотра отправляется автоматически. Ожидайте потверждение.
         </Card.Text>
-      
+        <Button variant="basic" className = "buttonCard" disabled="disabled">Запрос будет отправлен автоматически.</Button>
        
         
         
@@ -87,7 +88,7 @@ const MainPageContainer = ({CurrentUsersName}) => {
 
    
         <Dropdown className = "dropDown">
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
         Номер вагона
       </Dropdown.Toggle>
 
@@ -100,7 +101,7 @@ const MainPageContainer = ({CurrentUsersName}) => {
 
 
     <Dropdown className = "dropDown">
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
         Станция отбытия
       </Dropdown.Toggle>
 
@@ -113,7 +114,7 @@ const MainPageContainer = ({CurrentUsersName}) => {
 
 
     <Dropdown className = "dropDown">
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
         Станция прибытия
       </Dropdown.Toggle>
 
@@ -134,8 +135,10 @@ const MainPageContainer = ({CurrentUsersName}) => {
     {/* </div> */}
     </div>
     </div>
-        
-            <Button variant="secondary" size="lg" onClick={next} id="nextB"> Перейти к маршруту </Button>
+        <section className="margint">
+        <Button variant="secondary" size="lg" onClick={next} id="nextB"> Перейти к маршруту  </Button>
+        </section>
+           
        
     </div>
     )
