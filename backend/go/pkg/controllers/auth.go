@@ -32,6 +32,7 @@ func Register(ctx *gin.Context) {
 		Password: password,
 	}
 	user.Token = generateToken(10)
+	fmt.Println(user.Token)
 	_, err := database.DB.Query(fmt.Sprintf("INSERT INTO users (id,token,type,name, surname, password) VALUES('%s','%s','%s','%s','%s','%s')", user.Id, user.Token, user.Type, user.Name, user.Surname, user.Password))
 	if err != nil {
 		panic(err)
@@ -54,11 +55,10 @@ func Login(ctx *gin.Context) {
 
 	var user models.User
 	for res.Next() {
-		err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
+		err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password, &user.Token)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(user.Id)
 		if user.Id == "" {
 			ctx.JSON(http.StatusNotFound, gin.H{"message": "user not found"})
 			return
