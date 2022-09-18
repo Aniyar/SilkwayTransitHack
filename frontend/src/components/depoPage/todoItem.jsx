@@ -1,17 +1,33 @@
 import React from 'react'
-import { RiCloseCircleLine } from "react-icons/ri"
-import { BiCheckCircle } from "react-icons/bi"
+import Button from 'react-bootstrap/Button';
+import {
+    
+    MDBTableBody,
+  } from "mdb-react-ui-kit";
+  import "./index.css"
 
-export default function TodoItem(props) {
-    const { todo, removeTodo, completeTodo, importantTodo } = props
+const TodoItem = () => {
     return (
-        <div className={todo.completed ? "todo-row complete" : "todo-row"} style={todo.important ? { background: "orange" } : {}}>
-            {todo.text}
-            <div className="iconsContainer">
-                <button onClick={() => importantTodo(todo.id)} className="important-btn">!</button>
-                <RiCloseCircleLine style={{ marginRight: 5 }} onClick={() => removeTodo(todo.id)}/>
-                <BiCheckCircle onClick={() => completeTodo(todo.id)}/>
-            </div>
-        </div>
+       
+                  <MDBTableBody>
+                    <tr>
+                      <th scope="row">1023982</th>
+                      <td>Бауыржан Рахимович</td>
+                      <td>В прогрессе</td>
+                      <td>
+                        <Button variant="danger"  onClick={()=>{}}>
+                          Не потверждать
+                        </Button>
+
+                        <Button  variant="success" className="ms-1" onClick={()=>{}}>
+                          Потвердить
+                        </Button >
+                        </td>
+                    </tr>
+                   
+                  </MDBTableBody>
+               
     )
-}
+};
+
+export default TodoItem;
