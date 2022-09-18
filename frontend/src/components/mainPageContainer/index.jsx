@@ -10,27 +10,47 @@ import { useState } from "react";
 const MainPageContainer = ({CurrentUsersName}) => {
     const [isDone, setIsDone]= useState(false); 
     const navigate = useNavigate();
+    const [first, setFirst] = useState(false);
+    const [second, setSecond] = useState(false);
+    
     const next = () => {
-        console.log(isDone);
-        if (isDone===true){
+        if (isDone===true && first == true && second === true){
             navigate("/tracking");
-            window.location.reload()
+            window.location.reload();
+        } else {
+          alert("Wait!")
         }
     }
-       
-    
-    const arrived = () => {
-        // Если ДЕПО апрувнул прибытие то кнопка меняется 
-        const bc = document.getElementById('card1');
-       bc.style.backgroundColor = 'green';
-       
+
+    const arrived = () => { 
+      const bc = document.getElementById('card1');
+      if (first === false) {
+        bc.style.backgroundColor = 'green';
+        setFirst(true)
+      } else {
+        bc.style.backgroundColor = 'white';
+        setFirst(false)
+      }
     }
+
     const go = () => {
-        const bc = document.getElementById('card3');
-       bc.style.backgroundColor = 'green';
-       setIsDone(true);
-       const nextB = document.getElementById("nextB");
-       nextB.style.backgroundColor = 'blue';
+      const bc = document.getElementById('card3');
+      const nextB = document.getElementById("nextB");
+      console.log(first, second);
+      if (first === true && second === false) {
+        bc.style.backgroundColor = 'green';
+        setIsDone(true);
+        setSecond(true)
+        setFirst(true)
+        nextB.style.backgroundColor = 'blue'; 
+      } else if (first === false && second === false) {
+        alert("Wait!")
+      } else { 
+        bc.style.backgroundColor = 'white';
+        setSecond(false);
+        setIsDone(false);
+        nextB.style.backgroundColor = 'white'; 
+      } 
     }
     
     // ЕСЛИ АПРУВ МЕДОСМОТР ТО     const bc = document.getElementById('card2');
@@ -40,11 +60,6 @@ const MainPageContainer = ({CurrentUsersName}) => {
         text = (
             <h2 className="MainPageContainer-upperLarge-h1">Здравствуйте, {CurrentUsersName}! Задания на сегодня:</h2>
         )
-    // } else {
-    //     text = (
-    //         <h2 className="MainPageContainer-upperLarge-h1">Hello dear user!</h2>
-    //     )
-    // }
     return (
         <div className="MainPageContainer">
              {text}
@@ -76,9 +91,6 @@ const MainPageContainer = ({CurrentUsersName}) => {
         
       </Card.Body>
     </Card>
-    {/* </div> */}
-    {/* <div className="cardmargin"> */}
-   
     <Card style={{ width: '30rem' }}>
     <div className="drop">
       <Card.Body className="card" id="card3">
@@ -93,9 +105,14 @@ const MainPageContainer = ({CurrentUsersName}) => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Item  id="train001">Train001</Dropdown.Item>
+        <Dropdown.Item href="#/action-2" id="train002">Train002</Dropdown.Item>
+        <Dropdown.Item href="#/action-3" id="train003">Train003</Dropdown.Item>
+        <Dropdown.Item href="#/action-4" id="train004">Train004</Dropdown.Item>
+        <Dropdown.Item href="#/action-5" id="train005">Train005</Dropdown.Item>
+        <Dropdown.Item href="#/action-6" id="train006">Train006</Dropdown.Item>
+        <Dropdown.Item href="#/action-7" id="train007">Train007</Dropdown.Item>
+        <Dropdown.Item href="#/action-8" id="train008">Train008</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
 
@@ -131,15 +148,11 @@ const MainPageContainer = ({CurrentUsersName}) => {
       </Card.Body>
       </div>
     </Card>
-   
-    {/* </div> */}
     </div>
     </div>
         <section className="margint">
         <Button variant="secondary" size="lg" onClick={next} id="nextB"> Перейти к маршруту  </Button>
         </section>
-           
-       
     </div>
     )
 };

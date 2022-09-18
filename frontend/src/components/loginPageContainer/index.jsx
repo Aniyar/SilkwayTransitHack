@@ -22,7 +22,7 @@ const LoginPageContainer = ({setUsername}) => {
         const data = await response.json()
         console.log(data);
         navigate("/main");
-        setUsername(data.username);
+        setUsername(data.name + " " + data.surname);
     }
     return (
         <div className="loginPageContainer">
