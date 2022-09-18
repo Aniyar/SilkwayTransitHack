@@ -14,12 +14,14 @@ return (
           </div>
           <div class="card-body">
             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+
               <div class="step completed">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-cart"></i></div>
                 </div>
                 <h4 class="step-title">Алматы-2</h4>
               </div>
+
               <div class="step completed">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-config"></i></div>
@@ -44,6 +46,7 @@ return (
                 </div>
                 <h4 class="step-title">Кызылорда</h4>
               </div>
+              
             </div>
           </div>
         </div>

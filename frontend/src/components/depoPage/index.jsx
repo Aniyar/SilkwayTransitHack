@@ -19,10 +19,12 @@ const DepoPage = () => {
     // const [todos, setTodos] = useState([]);
 
     // const addToDo = (idNum,nameWork,surnameWork) => {
-    //     let todo = {id: idNum, name: nameWork, surname: surnameWork, completed: false};
-    //     let newTodos = [todo, ...todos]
-    //     setTodos(newTodos)
+    //     const todo = {id: idNum, name: nameWork, surname: surnameWork, completed: false};
+    //    
+    //     setTodos(...todos, todo)
     // }
+    // todos.map((todo)
+
     
    
 
