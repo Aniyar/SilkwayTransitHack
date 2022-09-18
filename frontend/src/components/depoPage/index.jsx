@@ -1,6 +1,7 @@
 
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./index.css"
+
 import {
     MDBCard,
     MDBCardBody,
@@ -53,9 +54,8 @@ const DepoPage = () => {
       </MDBContainer>
     </section>
     </div>
-    )
 
-    
-};
+
+
 
 export default DepoPage;
