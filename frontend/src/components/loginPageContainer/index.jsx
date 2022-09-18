@@ -20,8 +20,12 @@ const LoginPageContainer = ({setUsername}) => {
             })
         });
         const data = await response.json()
-        console.log(data);
-        navigate("/main");
+        console.log(data.message);
+        if (data.message === "success") {
+            navigate("/main");
+        } else {
+            alert("Incorrect Password")
+        }
         setUsername(data.name + " " + data.surname);
     }
     return (
