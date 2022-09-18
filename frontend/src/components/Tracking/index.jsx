@@ -90,7 +90,9 @@ const Tracking = ({username,id,type}) =>{
           </div>
           <div class="card-body">
             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+
               {array.map((item, i) => 
+
                 <div class="step completed">
                   <div onClick={() => console.log("Qwe")} class="step-icon-wrap">
                     <div class="step-icon"><i class="pe-7s-config"></i></div>
@@ -105,6 +107,7 @@ const Tracking = ({username,id,type}) =>{
                 </form> :  null}
               </div>
               )}
+
             </div>
           </div>
         </div>

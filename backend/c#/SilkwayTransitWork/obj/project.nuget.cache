@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A025CfRWDSDyVp+PyMOIXvDXCjpvy9dLkrSJqHzUXsIJiYLQ54fbknYtNcVh4kqxHxyABN8xqmQ8mcbSFUgzQA==",
+  "dgSpecHash": "GkOxu6XWRi9bcxtyeW3VaW4uRWq9X6J9uPwP/uR2cwso3GrofhHzsA25uQHmZ8/K3lbmElU1ufOMDd3ffRV7Zg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
+  "projectFilePath": "C:\\Users\\Aniyar\\Desktop\\Hack\\backend\\c#\\SilkwayTransitWork\\SilkwayTransitWork.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aniyar\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Aniyar\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

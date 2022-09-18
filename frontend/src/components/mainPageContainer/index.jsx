@@ -2,10 +2,9 @@ import React from "react";
 import "./index.css"
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Dropdown from 'react-bootstrap/Dropdown';
 import {useNavigate} from 'react-router-dom';
 import { useState } from "react";
-
+import Form from 'react-bootstrap/Form';
 
 const MainPageContainer = ({CurrentUsersName,id,type}) => {
     const [isDone, setIsDone]= useState(false); 
@@ -74,7 +73,12 @@ const MainPageContainer = ({CurrentUsersName,id,type}) => {
         <Card.Text>
           Отправьте запрос о прибытие в депо. Затем, дождитесь подверждения о вашем прибытие в депо.
         </Card.Text>
-      
+        <Form.Select aria-label="Default select example">
+      <option>Станция отбытия</option>
+      <option value="1">Алматы-2</option>
+      <option value="2">Шымкент</option>
+      <option value="3">Кызылорда-1</option>
+    </Form.Select>
         <Button variant="primary" className = "buttonCard" onClick={arrived}>Прибыл в депо.</Button>
   
       </Card.Body>
@@ -96,10 +100,32 @@ const MainPageContainer = ({CurrentUsersName,id,type}) => {
       <Card.Body className="card" id="card3">
         <Card.Title>Принятие вагона.</Card.Title>
 
+        
+        <Form.Select aria-label="Default select example">
+      <option> Номер вагона</option>
+      <option value="1">O123434</option>
+      <option value="2">0133493</option>
+      <option value="3">0139483</option>
+    </Form.Select>
+
+    <Form.Select aria-label="Default select example">
+      <option>Станция отбытия</option>
+      <option value="1">Алматы-2</option>
+      <option value="2">Шымкент</option>
+      <option value="3">Кызылорда-1</option>
+    </Form.Select>
+
+
+    <Form.Select aria-label="Default select example">
+      <option>Станция назначения</option>
+      <option value="1">Алматы-2</option>
+      <option value="2">Кызылорда-1</option>
+      <option value="3">Шымкент</option>
+    </Form.Select>
     
 
    
-        <Dropdown className = "dropDown">
+        {/* <Dropdown className = "dropDown">
       <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
         Номер вагона
       </Dropdown.Toggle>
@@ -141,7 +167,7 @@ const MainPageContainer = ({CurrentUsersName,id,type}) => {
         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  
+   */}
 
 
         <Button variant="primary" className = "buttonCard" onClick={go}>Отправить запрос</Button>
