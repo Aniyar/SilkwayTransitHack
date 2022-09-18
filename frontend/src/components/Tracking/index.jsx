@@ -58,8 +58,6 @@ const Tracking = ({username,id,type}) =>{
       }
     )();
   });  
-  console.log(key, array);
-
   const changeStatus =  async (e) => {
     e.preventDefault();
     const response = await fetch("http://localhost:8080/api/stationApprove", {
@@ -67,17 +65,17 @@ const Tracking = ({username,id,type}) =>{
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             "tripId":roadid,
-            "arrivalTime":arrivaltime,
-            "weight":weight,
-            "gas":gas,
-            "distance":distance,
+            "arrivalTime":document.getElementById("q4").value,
+            "weight":document.getElementById("q2").value,
+            "gas":document.getElementById("q1").value,
+            "distance":document.getElementById("q3").value,
             "depoApprove":"no",
             "stationId":array[key]
         })
     });
+    console.log(document.getElementById("q1").value)
     const data = await response.json()
     window.location.reload()
-    console.log(data);
 }
   return (
   <div className="progBar">
@@ -92,20 +90,36 @@ const Tracking = ({username,id,type}) =>{
             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
 
               {array.map((item, i) => 
-
-                <div class="step completed">
+                  (i >= key 
+                    ? 
+                    <div class="step">
                   <div onClick={() => console.log("Qwe")} class="step-icon-wrap">
                     <div class="step-icon"><i class="pe-7s-config"></i></div>
                   </div>
                 <h4 class="step-title">{item}</h4>
                 {key === i ? <form>
-                  <input placeholder="gas" type="text" onChange={e => setGas(e.target.value)} />
-                  <input placeholder="weight" type="text" onChange={e => setWeight(e.target.value)} />
-                  <input placeholder="distance" type="text" onChange={e => setDistance(e.target.value)} />
-                  <input placeholder="Arrival Time" type="text" onChange={e => setArrivaltime(e.target.value)} />
-                  <button onClick={(e)=>changeStatus(e)}> Approve</button>
+                  <input id="q1" className="form-control" placeholder="gas" type="text" />
+                  <input  id="q2" className="form-control" placeholder="weight" type="text" />
+                  <input id="q3" className="form-control" placeholder="distance" type="text"/>
+                  <input id="q4" className="form-control" placeholder="Arrival Time" type="text" />
+                  <button className="btn btn-outline-dark" onClick={(e)=>changeStatus(e)}> Approve</button>
                 </form> :  null}
               </div>
+              :
+              <div class="step completed  ">
+                  <div onClick={() => console.log("Qwe")} class="step-icon-wrap">
+                    <div class="step-icon"><i class="pe-7s-config"></i></div>
+                  </div>
+                <h4 class="step-title">{item}</h4>
+                {key === i ? <form>
+                  <input id="q1" className="form-control" placeholder="gas" type="text" />
+                  <input id="q2" className="form-control" placeholder="weight" type="text" />
+                  <input id="q3" className="form-control" placeholder="distance" type="text"/>
+                  <input id="q4" className="form-control" placeholder="Arrival Time" type="text"/>
+                  <button className="btn btn-outline-dark" onClick={(e)=>changeStatus(e)}> Approve</button>
+                </form> :  null}
+              </div>)
+                
               )}
 
             </div>
