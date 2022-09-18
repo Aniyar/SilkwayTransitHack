@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import { useState } from "react";
 
 
-const MainPageContainer = ({CurrentUsersName}) => {
+const MainPageContainer = ({CurrentUsersName,id,type}) => {
     const [isDone, setIsDone]= useState(false); 
     const navigate = useNavigate();
     const [first, setFirst] = useState(false);
