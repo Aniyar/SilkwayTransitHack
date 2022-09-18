@@ -30,7 +30,7 @@ const App = () => {
         <BrowserRouter>
             <PagesHeader setUsername={setUsername} username={username} id={id} type={type}/>
             <Routes>
-                <Route path={"/main"} element={<MainPage CurrentUsersName={username} />} />
+                <Route path={"/main"} element={<MainPage CurrentUsersName={username} id={id} type={type}/>} />
                 <Route path={"/"} element={<Login setUsername={setUsername}/>}/>
                 <Route path={"/register"} element={<Register />}/>
                 <Route path={"/depo"} element={<Depo/>}/>

@@ -23,15 +23,16 @@ func SetupRoutes() {
 
 	api := r.Group("/api")
 	api.GET("/check", func(ctx *gin.Context) { ctx.JSON(http.StatusOK, gin.H{"message": "Work pls!!"}) })
-	api.POST("/stationApprove", driver.Approve)
 	api.GET("/stations", driver.Stations)
 	api.GET("/user", controllers.User)
-	api.POST("/register", controllers.Register)
-	api.POST("/login", controllers.Login)
 	api.GET("/logout", controllers.Logout)
+	api.GET("/trips", driver.TripStations)
 	api.GET("/driver", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, driver.DriverInfo(ctx))
 	})
+	api.POST("/register", controllers.Register)
+	api.POST("/login", controllers.Login)
+	api.POST("/stationApprove", driver.Approve)
 	r.Run(":8080")
 
 }
