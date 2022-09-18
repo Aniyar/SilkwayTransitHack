@@ -38,6 +38,41 @@ const Tracking = ({username,id,type}) =>{
           </div>
           <div class="card-body">
             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+
+
+              <div class="step completed">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-cart"></i></div>
+                </div>
+                <h4 class="step-title">Алматы-2</h4>
+              </div>
+
+              <div class="step completed">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-config"></i></div>
+                </div>
+                <h4 class="step-title">Алматы-1</h4>
+              </div>
+              <div class="step completed">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-medal"></i></div>
+                </div>
+                <h4 class="step-title">Тараз</h4>
+              </div>
+              <div class="step">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-car"></i></div>
+                </div>
+                <h4 class="step-title">Шымкент-2</h4>
+              </div>
+              <div class="step">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-home"></i></div>
+                </div>
+                <h4 class="step-title">Кызылорда</h4>
+              </div>
+              
+
               {array.map((item) => 
                 <div class="step completed">
                   <div onClick={() => console.log("Qwe")} class="step-icon-wrap">
@@ -46,6 +81,7 @@ const Tracking = ({username,id,type}) =>{
                 <h4 class="step-title">{item}</h4>
               </div>
               )}
+
             </div>
           </div>
         </div>
