@@ -1,9 +1,9 @@
 import Tracking from "../components/Tracking"
 
 
-const Track = () => {
+const Track = ({username, id, type}) => {
     return(
-        <Tracking/ >
+        <Tracking username={username} id={id} type={type}/>
     )
 }
 
