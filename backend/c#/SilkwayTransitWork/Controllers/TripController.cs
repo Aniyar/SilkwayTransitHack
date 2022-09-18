@@ -22,7 +22,8 @@ namespace SilkwayTransitWork.Controllers
     public class TripController : ControllerBase
     {
 
-        [HttpPost(Name = "StartTrip")]
+        [HttpPost]
+        [Route("StartTrip")]
         public void StartTrip([FromQuery] String driverId, [FromQuery] String trainid, [FromQuery] String startstation, [FromQuery] String finalstation, [FromQuery] String roadid)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))
@@ -33,13 +34,15 @@ namespace SilkwayTransitWork.Controllers
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"SELECT MAX(tripid) FROM trips";
-                var tripid = Int32.Parse(cmd.ExecuteScalar().ToString()) + 1;
+                int tripid = 1;
+                try { tripid = Int32.Parse(cmd.ExecuteScalar().ToString()) + 1; }
+                catch (Exception e) { };
 
    
 
                 cmd.CommandText = $"INSERT INTO trips (tripid, driverid, trainid, date," +
-                    $"startstation, finalstation, roadid, approved, finished) VALUES " +
-                    $"('{tripid}', '{driverId}', '{trainid}', '{DateTime.Now.ToString()}', '{startstation}', '{finalstation}', '{roadid}', 'no', 'no')";
+                    $"startstation, finalstation, roadid, approved, finished, finishdate) VALUES " +
+                    $"('{tripid}', '{driverId}', '{trainid}', '{DateTime.Now.ToString()}', '{startstation}', '{finalstation}', '{roadid}', 'no', 'no', '')";
 
                 try
                 {
@@ -54,7 +57,8 @@ namespace SilkwayTransitWork.Controllers
             }
         }
 
-        [HttpPost(Name = "FinishTrip")]
+        [HttpPost]
+        [Route("FinishTrip")]
         public void FinishTrip([FromQuery] String driverId)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))

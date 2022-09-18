@@ -70,7 +70,7 @@ namespace SilkwayTransitWork.Controllers
                 cmd.CommandTimeout = 60;
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = $"UPDATE attendance SET medicalcheck='{approved}' WHERE driverid = '{driverId}'";
+                cmd.CommandText = $"UPDATE attendance SET medicalcheck='{approved}' WHERE driverid = '{driverId}' AND date = '{DateTime.Today.ToString("dd/MM/yyyy")}'";
 
                 try
                 {
