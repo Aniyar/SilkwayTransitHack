@@ -27,7 +27,7 @@ func DriverInfo(ctx *gin.Context) models.User {
 	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE token = '%s'", claims.Issuer))
 	if res != nil {
 		for res.Next() {
-			err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
+			err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password,  &user.Token)
 			if err != nil {
 				panic(err)
 			}

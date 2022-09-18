@@ -6,7 +6,9 @@ import {useNavigate} from 'react-router-dom';
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
 
-const MainPageContainer = ({CurrentUsersName,id,type}) => {
+const MainPageContainer = ({CurrentUsersName,Id,type}) => {
+  
+  console.log(Id, CurrentUsersName)
     const [isDone, setIsDone]= useState(false); 
     const navigate = useNavigate();
     const [first, setFirst] = useState(false);
@@ -51,23 +53,40 @@ const MainPageContainer = ({CurrentUsersName,id,type}) => {
 
     const arrived = async(e) => { 
       e.preventDefault();
-      console.log("https://localhost:7031/PresenseDriver?driverId=001" +  "&stationId="+stationId);
-      const response = await fetch("https://localhost:7031/PresenseDriver?driverId=001" +  "&stationId="+stationId, {
+      const response = await fetch("https://localhost:7031/PresenseDriver?driverId=" + Id +  "&stationId="+stationId, {
         method: 'POST',
         headers: {'Content-Type': 'string'},
         credentials: 'include'
-        // body: JSON.stringify({
-        //     id,
-        //     password
-        // })
-    });
+      })
+      
     const data = await response.json()
-        console.log(data);
-        navigate("/main");
+    console.log(data)
+    navigate("/main");  
 
       const bc = document.getElementById('card1');
       
-        bc.style.backgroundColor = 'green';
+        bc.style.backgroundColor = 'yellow';
+        setFirst(true)
+        setTimeout(() => {
+          bc.style.backgroundColor = 'green';
+        }, 3000);
+    }
+
+    const startTrip = async(e) => { 
+      e.preventDefault();
+      const response = await fetch("https://localhost:7031/Trip/StartTrip?driverId=" + Id + "&trainid=4567&startstation=Station1&finalstation=Station20&roadid=ALAAST", {
+        method: 'POST',
+        headers: {'Content-Type': 'string'},
+        credentials: 'include'
+      })
+      
+    const data = await response.json()
+    console.log(data)
+    navigate("/main");  
+
+      const bc = document.getElementById('card3');
+      
+        bc.style.backgroundColor = 'yellow';
         setFirst(true)
       // } else {
       //   bc.style.backgroundColor = 'white';
@@ -208,14 +227,14 @@ const MainPageContainer = ({CurrentUsersName,id,type}) => {
    */}
 
 
-        <Button variant="primary" className = "buttonCard" onClick={go}>Отправить запрос</Button>
+        <Button variant="primary" className = "buttonCard" onClick={startTrip}>Отправить запрос</Button>
       </Card.Body>
       </div>
     </Card>
     </div>
     </div>
         <section className="margint">
-        <Button variant="secondary" size="lg" onClick={next} id="nextB"> Перейти к маршруту  </Button>
+        <Button variant="secondary" size="lg" onClick={go} id="nextB"> Перейти к маршруту  </Button>
         </section>
     </div>
     )
