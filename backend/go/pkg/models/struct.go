@@ -1,6 +1,7 @@
 package models
 
 type User struct {
+	Token    string `json:"token"`
 	Id       string `json:"id"`
 	Type     string `json:"type"`
 	Name     string `json:"name"`
@@ -12,6 +13,8 @@ type Trips struct {
 	TripId       string `json:"tripId"`
 	DriverId     string `json:"driverID"`
 	TrainId      string `json:"trainId"`
+	Date         string `json:"date"`
+	Finishdate   string `json:"finishdate"`
 	RoadId       string `json:"roadId"`
 	StartStation string `json:"startStation"`
 	FinalStation string `json:"finalStation"`
@@ -19,6 +22,10 @@ type Trips struct {
 	Finished     string `json:"finished"`
 }
 
+type Roads struct {
+	RoadId   string `json:"roadId"`
+	Stations string `json:"stations"`
+}
 type TrainsHistory struct {
 	TripId      string `json:"tripId"`
 	Gas         string `json:"gas"`

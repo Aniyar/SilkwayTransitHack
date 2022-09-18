@@ -1,6 +1,6 @@
 
-import React from "react";
-import "./index.css"
+import React, {useState, useEffect} from "react";
+import "./index.css"  
 import {
     MDBCard,
     MDBCardBody,
@@ -11,7 +11,6 @@ import {
     MDBTableHead,
   } from "mdb-react-ui-kit";
 import TodoItem from "./todoItem";
-import { useState } from "react";
 
 
 
@@ -37,7 +36,7 @@ const DepoPage = () => {
               <MDBCard className="rounded-3">
                 <MDBCardBody className="p-4">
                   <h4 className="text-center my-3 pb-3">Прибытие работников в ДЕПО</h4>
-        <MDBTable className="mb-4">
+                    <MDBTable className="mb-4">
                   <MDBTableHead>
                     <tr>
                       <th scope="col">ID</th>
@@ -46,8 +45,8 @@ const DepoPage = () => {
                       <th scope="col">Действия</th>
                     </tr>
                   </MDBTableHead>
-           <TodoItem></TodoItem>
-           </MDBTable>
+                  <TodoItem></TodoItem>
+                  </MDBTable>
                 </MDBCardBody>
             </MDBCard>
           </MDBCol>
@@ -55,9 +54,8 @@ const DepoPage = () => {
       </MDBContainer>
     </section>
     </div>
-    )
+  )
+  }
 
-    
-};
 
 export default DepoPage;
