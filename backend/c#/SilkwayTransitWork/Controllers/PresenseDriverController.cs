@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 //using Microsoft.AspNetCore.Mvc;
 
 namespace SilkwayTransitWork.Controllers
@@ -25,7 +27,7 @@ namespace SilkwayTransitWork.Controllers
         //[Route("api/Insert-Attendance")]
 
         [HttpPost(Name = "InsertAttendance")]
-        public void InsertAttendance([Microsoft.AspNetCore.Mvc.FromQuery]String driverId, [Microsoft.AspNetCore.Mvc.FromQuery] String stationId)
+        public String InsertAttendance([Microsoft.AspNetCore.Mvc.FromQuery]String driverId, [Microsoft.AspNetCore.Mvc.FromQuery] String stationId)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))
             {
@@ -41,12 +43,13 @@ namespace SilkwayTransitWork.Controllers
                 try
                 {                    
                     cmd.ExecuteNonQuery();
+                    return JsonSerializer.Serialize<Status>(new Status() { data = "success" });
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                return;
+                return JsonSerializer.Serialize<Status>(new Status() { data = "fail" }); 
             }
         }
     }

@@ -11,8 +11,9 @@ const MainPageContainer = ({CurrentUsersName}) => {
     const navigate = useNavigate();
     const [first, setFirst] = useState(false);
     const [second, setSecond] = useState(false);
+    const [stationId, setStationId] = useState("");
     
-    const next = () => {
+    const next = ({}) => {
         if (isDone===true && first == true && second === true){
             navigate("/tracking");
             window.location.reload();
@@ -21,15 +22,57 @@ const MainPageContainer = ({CurrentUsersName}) => {
         }
     }
 
-    const arrived = () => { 
+    // const Tracking = ({username,id,type}) =>{
+    //   const [road, setRoad] = useState("")
+    //   useEffect(()=> {
+    //     (
+    //       async () => {
+    //         const response = await fetch("http://localhost:8080/api/stations", {
+    //           headers: {'Content-Type': 'application/json'},
+    //           credentials: 'include',
+    //         });
+    //         const data = await response.json()
+    //         setRoad(data.stations)
+    //       }
+    //     )();
+    //   });  
+    //   let array = []
+    //   if (road !== "") {
+    //     let stat = ""
+    //     for (let i = 0; i <= road.length; i++ ) {
+    //       if (road[i] === "/" || i == road.length) {
+    //         array.push(stat)
+    //         stat = ""
+    //       } else {
+    //         stat = stat + road[i]
+    //       }
+    //     }
+    //   }
+
+    const arrived = async(e) => { 
+      e.preventDefault();
+      console.log("https://localhost:7031/PresenseDriver?driverId=001" +  "&stationId="+stationId);
+      const response = await fetch("https://localhost:7031/PresenseDriver?driverId=001" +  "&stationId="+stationId, {
+        method: 'POST',
+        headers: {'Content-Type': 'string'},
+        credentials: 'include'
+        // body: JSON.stringify({
+        //     id,
+        //     password
+        // })
+    });
+    const data = await response.json()
+        console.log(data);
+        navigate("/main");
+
       const bc = document.getElementById('card1');
-      if (first === false) {
+      
         bc.style.backgroundColor = 'green';
         setFirst(true)
-      } else {
-        bc.style.backgroundColor = 'white';
-        setFirst(false)
-      }
+      // } else {
+      //   bc.style.backgroundColor = 'white';
+      //   setFirst(false)
+      // }
     }
 
     const go = () => {
@@ -73,12 +116,7 @@ const MainPageContainer = ({CurrentUsersName}) => {
         <Card.Text>
           Отправьте запрос о прибытие в депо. Затем, дождитесь подверждения о вашем прибытие в депо.
         </Card.Text>
-        <Form.Select aria-label="Default select example">
-      <option>Станция отбытия</option>
-      <option value="1">Алматы-2</option>
-      <option value="2">Шымкент</option>
-      <option value="3">Кызылорда-1</option>
-    </Form.Select>
+        <input onChange={(e) => setStationId(e.target.value)} />
         <Button variant="primary" className = "buttonCard" onClick={arrived}>Прибыл в депо.</Button>
   
       </Card.Body>
