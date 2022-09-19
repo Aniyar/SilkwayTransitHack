@@ -7,7 +7,6 @@ import (
 
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/database"
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/models"
-	"github.com/doxanocap/golang-react/backend/pkg/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -35,14 +34,14 @@ func Approve(ctx *gin.Context) {
 		if err != nil {
 			panic(err)
 		}
-		res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM trip stations WHERE depoapprove = 'no'"))
+		res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM tripstations WHERE depoapprove = 'no'"))
 		if err != nil {
 			panic(err)
 		}
 		var depolist []models.TrainsHistory
 		for res.Next() {
 			var depo models.TrainsHistory
-			err = res.Scan(&depo.TripId, &depo.Gas, &depo.Weight, &depo.StationId, &depo.Distance, &depo.ArrivalTime, &depo.DepoApprove, &depo.DepartureTime)
+			err = res.Scan(&depo.TripId, &depo.Gas, &depo.Weight, &depo.StationId, &depo.Distance, &depo.ArrivalTime, &depo.DepoApprove, &depo.DepoApproveTime)
 			if err != nil {
 				panic(err)
 			}

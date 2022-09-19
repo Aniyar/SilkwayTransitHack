@@ -14,6 +14,11 @@ const MainPageContainer = ({CurrentUsersName,Id,type}) => {
     const [first, setFirst] = useState(false);
     const [second, setSecond] = useState(false);
     const [stationId, setStationId] = useState("");
+
+    const [trainNum, setTrainNum] = useState("");
+    const [startStation, setStartStation] = useState("");
+    const [finalStation, setFinalStation] = useState("");
+    const [roadId, setRoadId] = useState("");
     
     const next = ({}) => {
         if (isDone===true && first == true && second === true){
@@ -23,33 +28,6 @@ const MainPageContainer = ({CurrentUsersName,Id,type}) => {
           alert("Wait!")
         }
     }
-
-    // const Tracking = ({username,id,type}) =>{
-    //   const [road, setRoad] = useState("")
-    //   useEffect(()=> {
-    //     (
-    //       async () => {
-    //         const response = await fetch("http://localhost:8080/api/stations", {
-    //           headers: {'Content-Type': 'application/json'},
-    //           credentials: 'include',
-    //         });
-    //         const data = await response.json()
-    //         setRoad(data.stations)
-    //       }
-    //     )();
-    //   });  
-    //   let array = []
-    //   if (road !== "") {
-    //     let stat = ""
-    //     for (let i = 0; i <= road.length; i++ ) {
-    //       if (road[i] === "/" || i == road.length) {
-    //         array.push(stat)
-    //         stat = ""
-    //       } else {
-    //         stat = stat + road[i]
-    //       }
-    //     }
-    //   }
 
     const arrived = async(e) => { 
       e.preventDefault();
@@ -74,7 +52,10 @@ const MainPageContainer = ({CurrentUsersName,Id,type}) => {
 
     const startTrip = async(e) => { 
       e.preventDefault();
-      const response = await fetch("https://localhost:7031/Trip/StartTrip?driverId=" + Id + "&trainid=4567&startstation=Station1&finalstation=Station20&roadid=ALAAST", {
+      const response = await fetch("https://localhost:7031/Trip/StartTrip?driverId=" + Id +
+                                   "&trainid=" + trainNum + "&startstation=" + startStation + 
+                                   "&finalstation=" + finalStation + "&roadid=" + roadId, 
+      {
         method: 'POST',
         headers: {'Content-Type': 'string'},
         credentials: 'include'
@@ -157,75 +138,14 @@ const MainPageContainer = ({CurrentUsersName,Id,type}) => {
       <Card.Body className="card" id="card3">
         <Card.Title>Принятие вагона.</Card.Title>
 
-        
-        <Form.Select aria-label="Default select example">
-      <option> Номер вагона</option>
-      <option value="1">O123434</option>
-      <option value="2">0133493</option>
-      <option value="3">0139483</option>
-    </Form.Select>
-
-    <Form.Select aria-label="Default select example">
-      <option>Станция отбытия</option>
-      <option value="1">Алматы-2</option>
-      <option value="2">Шымкент</option>
-      <option value="3">Кызылорда-1</option>
-    </Form.Select>
-
-
-    <Form.Select aria-label="Default select example">
-      <option>Станция назначения</option>
-      <option value="1">Алматы-2</option>
-      <option value="2">Кызылорда-1</option>
-      <option value="3">Шымкент</option>
-    </Form.Select>
-    
-
-   
-        {/* <Dropdown className = "dropDown">
-      <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-        Номер вагона
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item  id="train001">Train001</Dropdown.Item>
-        <Dropdown.Item href="#/action-2" id="train002">Train002</Dropdown.Item>
-        <Dropdown.Item href="#/action-3" id="train003">Train003</Dropdown.Item>
-        <Dropdown.Item href="#/action-4" id="train004">Train004</Dropdown.Item>
-        <Dropdown.Item href="#/action-5" id="train005">Train005</Dropdown.Item>
-        <Dropdown.Item href="#/action-6" id="train006">Train006</Dropdown.Item>
-        <Dropdown.Item href="#/action-7" id="train007">Train007</Dropdown.Item>
-        <Dropdown.Item href="#/action-8" id="train008">Train008</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-
-
-    <Dropdown className = "dropDown">
-      <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-        Станция отбытия
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-
-
-    <Dropdown className = "dropDown">
-      <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-        Станция прибытия
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-   */}
-
+        <label>Номер поезда</label>
+        <input onChange={e => setTrainNum(e.target.value)}></input>
+        <label >Дорога</label>
+        <input onChange={e => setRoadId(e.target.value)}></input>
+        <label>Станция отправления</label>
+        <input onChange={e => setStartStation(e.target.value)}></input>
+        <label >Станция назначения</label>
+        <input onChange={e => setFinalStation(e.target.value)}></input>
 
         <Button variant="primary" className = "buttonCard" onClick={startTrip}>Отправить запрос</Button>
       </Card.Body>
