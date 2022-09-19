@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+    version="1.0" exclude-result-prefixes="msxsl">
+	<xsl:template match="/">
+		<html>
+
+			<head>
+				<title>Маршрутный лист</title>
+			</head>
+			<style>
+				td {
+				border: solid 1px black;
+				}
+			</style>
+			<body>
+				<h1 align="center">Маршрутный лист</h1>
+				<xsl:for-each select="report/trip">
+					<div align="center">
+						<h2>Информация о поездке</h2>
+						<table class ="main">
+							
+							<tr>
+								<td>Номер поездки</td>
+								<td>Управляющий локомотивом</td>
+								<td>Номер поезда</td>
+								<td>Поезд принят</td>
+								<td>Поезд сдан</td>
+								<td>Дорога</td>
+								<td>Начало</td>
+								<td>Конец</td>
+							</tr>
+							<tr>
+								<td>
+									<xsl:value-of select="@tripid" />
+								</td>
+								<td>
+									<xsl:value-of select="@driver" />
+								</td>
+								<td>
+									<xsl:value-of select="@trainid" />
+								</td>
+								<td>
+									<xsl:value-of select="@date" />
+								</td>
+								<td>
+									<xsl:value-of select="@finishdate" />
+								</td>
+								<td>
+									<xsl:value-of select="@roadid" />
+								</td>
+								<td>
+									<xsl:value-of select="@startstation" />
+								</td>
+								<td>
+									<xsl:value-of select="@finalstation" />
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div align="center">
+						<h2>Промежуточные станции</h2>
+						<table>
+							<tr>
+								<td>Станция</td>
+								<td>Приезд</td>
+								<td>Подтверждение Депо</td>
+								<td>Газ</td>
+								<td>Вес</td>
+								<td>Дистанция</td>
+							</tr>
+							<xsl:for-each select="tripstation">
+								<tr>
+									<td>
+										<xsl:value-of select="@stationid" />
+									</td>
+									<td>
+										<xsl:value-of select="@arrivaltime" />
+									</td>
+									<td>
+										<xsl:value-of select="@depoapprovedtime" />
+									</td>
+									<td>
+										<xsl:value-of select="@gas" />
+									</td>
+									<td>
+										<xsl:value-of select="@weight" />
+									</td>
+									<td>
+										<xsl:value-of select="@distance" />
+									</td>
+								</tr>
+							</xsl:for-each>
+						</table>
+					</div>
+					
+				</xsl:for-each>
+			</body>
+
+		</html>
+	</xsl:template>
+</xsl:stylesheet>
+				
