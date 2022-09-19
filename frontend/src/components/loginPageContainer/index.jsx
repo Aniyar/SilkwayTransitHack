@@ -21,8 +21,10 @@ const LoginPageContainer = ({setUsername}) => {
         });
         const data = await response.json()
         console.log(data.message);
+
         if (data.message === "success") {
             navigate("/main");
+            window.location.reload()
         } else {
             alert("Incorrect Password")
         }
