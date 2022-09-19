@@ -7,6 +7,10 @@ const Tracking = ({username,id,type}) =>{
   const [roadid, setRoadid] = useState("");
   const [road, setRoad] = useState("")
   const [stationid, setStationid] = useState("");
+
+  const [approved, setApproved] = useState("");
+  const [key2, setKey2] = useState(0);
+
   const [distance, setDistance] = useState("");
   const [weight, setWeight] = useState("");
   const [gas, setGas] = useState("");
@@ -76,8 +80,42 @@ const Tracking = ({username,id,type}) =>{
   });  
 
   
+  window.setInterval( async function(){
+    let i = 0;
+    const response = await fetch("http://localhost:8080/api/trips", {
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'include',
+        });
+        const data = await response.json()
+        console.log(data);
+        for (let j = 0; j < data.length; j++) {
+          if (data[j].depoApprove === "yes") {
+            i = i + 1
+          }
+        }
+    setKey2(i)
+  }, 10000);
 
-    
+  useEffect(()=> {
+    (
+      async () => {
+        let i = 0;
+        const response = await fetch("http://localhost:8080/api/trips", {
+              headers: {'Content-Type': 'application/json'},
+              credentials: 'include',
+            });
+            const data = await response.json()
+            console.log(data);
+            for (let j = 0; j < data.length; j++) {
+              if (data[j].depoApprove === "yes") {
+                i = i + 1
+              }
+            }
+        setKey2(i)
+      }
+  )();
+  })
+
 
   const changeStatus =  async (e) => {
     e.preventDefault();
@@ -94,8 +132,8 @@ const Tracking = ({username,id,type}) =>{
             "stationId":array[key]
         })
     });
-    console.log(document.getElementById("q1").value)
     const data = await response.json()
+    console.log(data);
     window.location.reload()
 }
 
@@ -112,14 +150,15 @@ const Tracking = ({username,id,type}) =>{
             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
 
               {array.map((item, i) => 
-                  (i >= key 
+                  (i >= key2 
                     ? 
                     <div class="step">
                   <div onClick={() => console.log("Qwe")} class="step-icon-wrap">
                     <div class="step-icon"><i class="pe-7s-config"></i></div>
                   </div>
                 <h4 class="step-title">{item}</h4>
-                {key === i ? <form>
+                {console.log(key2)}
+                {key2 === i ? <form>
                   <input id="q1" className="form-control" placeholder="gas" type="text" />
                   <input  id="q2" className="form-control" placeholder="weight" type="text" />
                   <input id="q3" className="form-control" placeholder="distance" type="text"/>

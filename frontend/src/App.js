@@ -26,7 +26,6 @@ const App = () => {
             }
         )();
     });
-    console.log(id);
     return (
         <BrowserRouter>
             <PagesHeader setUsername={setUsername} username={username} id={id} type={type}/>
