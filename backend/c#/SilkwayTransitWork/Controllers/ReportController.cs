@@ -26,7 +26,7 @@ namespace SilkwayTransitWork.Controllers
     public class ReportController : ControllerBase
     {
         [HttpGet(Name = "getReport")]
-        public String getReport([FromQuery] String tripid)
+        public String getReport([FromQuery] String driverid)
         {
             XDocument htReport = new XDocument();
             
@@ -41,16 +41,14 @@ namespace SilkwayTransitWork.Controllers
                     cmd.CommandTimeout = 60;
                     cmd.Connection = connection;
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = $"SELECT * from trips where tripid = '{tripid}'";
+                    cmd.CommandText = $"SELECT * from trips where driverid = '{driverid}'";
 
                     
                     Trip trip = new Trip();
 
                     var dr = cmd.ExecuteReader();
                     dr.Read();
-
-
-                    var driverid = dr["driverid"].ToString();
+                    var tripid = dr["tripid"].ToString();
 
                     XElement tripElem = new XElement("trip",
                             new XAttribute("tripid", dr["tripid"].ToString()),
@@ -62,7 +60,7 @@ namespace SilkwayTransitWork.Controllers
 
                             new XAttribute("roadid", dr["roadid"].ToString()),
                             new XAttribute("date", dr["date"].ToString()),
-                            new XAttribute("finishdate", dr["date"].ToString())
+                            new XAttribute("finishdate", dr["finishdate"].ToString())
                         );
 
                     dr.Close();

@@ -20,6 +20,14 @@ const Tracking = ({username,id,type}) =>{
     })
   }
 
+  const getReport = async(e) => { 
+    e.preventDefault();
+    const response = await fetch("https://localhost:7031/Trip/getReport?driverid=" + id, {
+      method: 'POST',
+      credentials: 'include'
+    })
+  }
+
   let key = 0
   let array = []
   if (road !== "") {
@@ -95,7 +103,7 @@ const Tracking = ({username,id,type}) =>{
   <div className="progBar">
     <div class="container padding-bottom-3x mb-1">
         <div class="card mb-3">
-          <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Номер поездки - </span><span class="text-medium">{roadid}</span></div>
+          <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Поездка</span><span class="text-medium">{roadid}</span></div>
           <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
             <div class="w-100 text-center py-1 px-2" key={username}><span class="text-medium">Имя управляющего поезда:</span> {username} </div>
             <div class="w-100 text-center py-1 px-2"><span class="text-medium">ИИН</span> {id}</div>
@@ -147,6 +155,7 @@ const Tracking = ({username,id,type}) =>{
       
       </div>
       <div align="center"><button className="btn btn-outline-dark" onClick={(e)=>finishTrip(e)}> Завершить поездку и сдать локомотив</button></div>
+      <div align="center"><button className="btn btn-outline-dark" onClick={(e)=>getReport(e)}> Скачать маршрутный лист</button></div>
 
       </div>
   
