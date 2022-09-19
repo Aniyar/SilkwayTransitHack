@@ -234,7 +234,7 @@ const MainPageContainer = ({CurrentUsersName,Id,type}) => {
     </div>
     </div>
         <section className="margint">
-        <Button variant="secondary" size="lg" onClick={go} id="nextB"> Перейти к маршруту  </Button>
+        <Button variant="secondary" size="lg" onClick={()=>(navigate("/tracking"))} id="nextB"> Перейти к маршруту  </Button>
         </section>
     </div>
     )
