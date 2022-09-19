@@ -24,10 +24,14 @@ func DriverInfo(ctx *gin.Context) models.User {
 	}
 	claims := token.Claims.(*jwt.RegisteredClaims)
 	user := models.User{"", "", "", "", "", []byte{}}
-	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE token = '%s'", claims.Issuer))
+	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE token = '%s'", claims.Issuer))
+	if err != nil {
+		panic(err)
+	}
+	defer res.Close()
 	if res != nil {
 		for res.Next() {
-			err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password,  &user.Token)
+			err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
 			if err != nil {
 				panic(err)
 			}
@@ -43,6 +47,7 @@ func Stations(ctx *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
+	defer res.Close()
 	var trip models.Trips
 	for res.Next() {
 		err := res.Scan(&trip.TripId, &trip.DriverId, &trip.TrainId, &trip.Date, &trip.StartStation, &trip.FinalStation, &trip.RoadId, &trip.Approved, &trip.Finished, &trip.Finishdate)
@@ -55,6 +60,7 @@ func Stations(ctx *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
+	defer res.Close()
 	var road models.Roads
 	for res.Next() {
 		err := res.Scan(&road.RoadId, &road.Stations)
@@ -71,15 +77,15 @@ func TripStations(ctx *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
+	defer res.Close()
 	var road []models.TrainsHistory
 	for res.Next() {
 		var train models.TrainsHistory
-		err := res.Scan(&train.TripId, &train.Gas, &train.Weight, &train.StationId, &train.DepoApprove, &train.Distance, &train.ArrivalTime)
+		err := res.Scan(&train.TripId, &train.Gas, &train.Weight, &train.StationId, &train.Distance, &train.ArrivalTime, &train.DepoApprove, &train.DepoApproveTime)
 		if err != nil {
 			panic(err)
 		}
 		road = append(road, train)
 	}
 	ctx.JSON(http.StatusOK, road)
-
 }

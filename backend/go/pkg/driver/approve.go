@@ -7,7 +7,6 @@ import (
 
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/database"
 	"github.com/doxanocap/SilkwayTransitHack/backend/go/pkg/models"
-	"github.com/doxanocap/golang-react/backend/pkg/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,35 +24,42 @@ func Approve(ctx *gin.Context) {
 		StationId:   data["stationId"],
 		DepoApprove: data["depoApprove"],
 	}
-	fmt.Println(currentStation)
 	if currentStation.TripId == "" {
 		ctx.JSON(http.StatusOK, gin.H{"message": "nope"})
 		return
 	}
 	if currentStation.DepoApprove == "no" {
-		_, err := database.DB.Query(fmt.Sprintf("INSERT INTO tripstations VALUES('%s','%s','%s','%s','%s','%s','%s','%s')", currentStation.TripId, currentStation.Gas, currentStation.Weight, currentStation.StationId, currentStation.Distance, currentStation.ArrivalTime, currentStation.DepoApprove, "none"))
+		if currentStation.TripId != "toParseTripstations" && currentStation.Gas != "" {
+			row, err := database.DB.Query(fmt.Sprintf("INSERT INTO tripstations VALUES('%s','%s','%s','%s','%s','%s','%s','%s')", currentStation.TripId, currentStation.Gas, currentStation.Weight, currentStation.StationId, currentStation.Distance, currentStation.ArrivalTime, currentStation.DepoApprove, "not yet"))
+			if err != nil {
+				panic(err)
+			}
+			ctx.JSON(http.StatusOK, gin.H{"message": "driver approve"})
+			defer row.Close()
+			return
+		}
+		res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM tripstations WHERE depoapproved = 'no'"))
 		if err != nil {
 			panic(err)
 		}
-		res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM trip stations WHERE depoapprove = 'no'"))
-		if err != nil {
-			panic(err)
-		}
+		defer res.Close()
 		var depolist []models.TrainsHistory
 		for res.Next() {
 			var depo models.TrainsHistory
-			err = res.Scan(&depo.TripId, &depo.Gas, &depo.Weight, &depo.StationId, &depo.Distance, &depo.ArrivalTime, &depo.DepoApprove, &depo.DepartureTime)
+			err = res.Scan(&depo.TripId, &depo.Gas, &depo.Weight, &depo.StationId, &depo.Distance, &depo.ArrivalTime, &depo.DepoApprove, &depo.DepoApproveTime)
 			if err != nil {
 				panic(err)
 			}
 			depolist = append(depolist, depo)
 		}
+
 		ctx.JSON(http.StatusOK, depolist)
 	} else {
-		_, err := database.DB.Query(fmt.Sprintf("UPDATE tripstations SET depoapprove = 'yes', depoapprovetime = '%s' WHERE tripid = '%s' and stationid = '%s'", time.Now().Format("15:04 2006-01-02"), currentStation.TripId, currentStation.StationId))
+		res, err := database.DB.Query(fmt.Sprintf("UPDATE tripstations SET depoapproved = 'yes', depoapprovedtime = '%s' WHERE tripid = '%s' and stationid = '%s'", time.Now().Format("15:04 2006-01-02"), currentStation.TripId, currentStation.StationId))
 		if err != nil {
 			panic(err)
 		}
+		defer res.Close()
 		ctx.JSON(http.StatusOK, gin.H{"message": "Depo Approved"})
 	}
 }

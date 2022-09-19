@@ -52,10 +52,11 @@ func Login(ctx *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
+	defer res.Close()
 
 	var user models.User
 	for res.Next() {
-		err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password, &user.Token)
+		err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
 		if err != nil {
 			panic(err)
 		}
@@ -85,7 +86,6 @@ func Login(ctx *gin.Context) {
 		Value:   token,
 		Expires: time.Now().Add(time.Hour * 24),
 	})
-	fmt.Println(user, "qwe")
 
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
@@ -105,7 +105,11 @@ func User(ctx *gin.Context) {
 	claims := token.Claims.(*jwt.RegisteredClaims)
 
 	var user models.User
-	res, _ := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE token = '%s'", claims.Issuer))
+	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM users WHERE token = '%s'", claims.Issuer))
+	if err != nil {
+		panic(err)
+	}
+	defer res.Close()
 	for res.Next() {
 		err = res.Scan(&user.Id, &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
 		if err != nil {
