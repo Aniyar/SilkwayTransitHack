@@ -27,11 +27,12 @@ type Roads struct {
 	Stations string `json:"stations"`
 }
 type TrainsHistory struct {
-	TripId      string `json:"tripId"`
-	Gas         string `json:"gas"`
-	Weight      string `json:"weight"`
-	StationId   string `json:"stationId"`
-	DepoApprove string `json:"depoApprove"`
-	Distance    string `json:"distance"`
-	ArrivalTime string `json:"arrivalTime"`
+	TripId          string `json:"tripId"`
+	Gas             string `json:"gas"`
+	Weight          string `json:"weight"`
+	StationId       string `json:"stationId"`
+	Distance        string `json:"distance"`
+	ArrivalTime     string `json:"arrivalTime"`
+	DepoApprove     string `json:"depoApprove"`
+	DepoApproveTime string `json:"depoApproveTime`
 }
