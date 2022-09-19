@@ -38,7 +38,9 @@ func Approve(ctx *gin.Context) {
 			defer row.Close()
 			return
 		}
+
 		res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM tripstations WHERE depoapproved = 'no'"))
+
 		if err != nil {
 			panic(err)
 		}

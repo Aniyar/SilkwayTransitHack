@@ -43,7 +43,7 @@ func DriverInfo(ctx *gin.Context) models.User {
 
 func Stations(ctx *gin.Context) {
 	user := DriverInfo(ctx)
-	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM trips WHERE driverid = '%s'", user.Name+user.Surname))
+	res, err := database.DB.Query(fmt.Sprintf("SELECT * FROM trips WHERE driverid = '%s'", user.Id))
 	if err != nil {
 		panic(err)
 	}
