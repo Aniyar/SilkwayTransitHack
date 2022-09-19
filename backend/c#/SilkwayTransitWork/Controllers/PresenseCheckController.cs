@@ -60,7 +60,7 @@ namespace SilkwayTransitWork.Controllers
         }
 
         [HttpPost(Name = "ApprovePresenseDriver")]
-        public void ApprovePresenseDriver([FromQuery] String driverId, [FromQuery] String approved)
+        public String ApprovePresenseDriver([FromQuery] String driverId, [FromQuery] String approved)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))
             {
@@ -74,13 +74,15 @@ namespace SilkwayTransitWork.Controllers
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    
-                    return;
+
+
+                    return JsonSerializer.Serialize<Status>(new Status() { data = "success" }); 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Error approving driver attendance " + e.Message);
-                    return;
+
+                    return JsonSerializer.Serialize<Status>(new Status() { data = "fail" }); 
                 }
             }
         }

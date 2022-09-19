@@ -24,7 +24,7 @@ namespace SilkwayTransitWork.Controllers
 
         [HttpPost]
         [Route("StartTrip")]
-        public void StartTrip([FromQuery] String driverId, [FromQuery] String trainid, [FromQuery] String startstation, [FromQuery] String finalstation, [FromQuery] String roadid)
+        public String StartTrip([FromQuery] String driverId, [FromQuery] String trainid, [FromQuery] String startstation, [FromQuery] String finalstation, [FromQuery] String roadid)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))
             {
@@ -47,19 +47,21 @@ namespace SilkwayTransitWork.Controllers
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    return;
+
+                    return JsonSerializer.Serialize<Status>(new Status() { data = "success" }); 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Error creating trip " + e.Message);
-                    return;
+
+                    return JsonSerializer.Serialize<Status>(new Status() { data = "fail" }); 
                 }
             }
         }
 
         [HttpPost]
         [Route("FinishTrip")]
-        public void FinishTrip([FromQuery] String driverId)
+        public String FinishTrip([FromQuery] String driverId)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString()))
             {
@@ -78,12 +80,14 @@ namespace SilkwayTransitWork.Controllers
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    return;
+
+                    return JsonSerializer.Serialize<Status>(new Status() { data = "success" }); 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Error creating trip " + e.Message);
-                    return;
+
+                    return JsonSerializer.Serialize<Status>(new Status() { data = "fail" }); 
                 }
             }
         }

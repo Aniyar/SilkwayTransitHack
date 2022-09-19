@@ -1,8 +1,8 @@
 import MainPageContainer from '../components/mainPageContainer/index';
 
-const MainPage = ({CurrentUsersName}) => {
+const MainPage = ({CurrentUsersName, Id, type}) => {
     return (
-        <MainPageContainer CurrentUsersName={CurrentUsersName} />
+        <MainPageContainer CurrentUsersName={CurrentUsersName} Id={Id} type={type} />
     )
 }
 

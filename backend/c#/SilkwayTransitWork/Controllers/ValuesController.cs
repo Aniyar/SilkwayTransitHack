@@ -46,7 +46,7 @@ namespace SilkwayTransitWork.Controllers
                     return JsonSerializer.Serialize(tss);
                 }
             }
-            return "[]";
+            return JsonSerializer.Serialize<Status>(new Status() { data = "fail" });
         }
     }
 
