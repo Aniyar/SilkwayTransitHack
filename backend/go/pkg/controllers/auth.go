@@ -55,7 +55,7 @@ func Login(ctx *gin.Context) {
 
 	var user models.User
 	for res.Next() {
-		err = res.Scan(&user.Id, &user.Type, &user.Name, &user.Surname, &user.Password, &user.Token)
+		err = res.Scan(&user.Id,  &user.Token, &user.Type, &user.Name, &user.Surname, &user.Password)
 		if err != nil {
 			panic(err)
 		}

@@ -70,7 +70,7 @@ namespace SilkwayTransitWork.Controllers
                 cmd.CommandTimeout = 60;
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = $"SELECT tripid FROM trips WHERE driverid = '{driverId}' AND approved = 'yes' AND finished = 'no'";
+                cmd.CommandText = $"SELECT tripid FROM trips WHERE driverid = '{driverId}' AND finished = 'no'";
                 var tripid = cmd.ExecuteScalar().ToString();
 
 
